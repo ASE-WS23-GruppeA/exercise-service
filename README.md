@@ -1,1 +1,1 @@
-# exersise-service
+# exercise-service
