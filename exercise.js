@@ -1,5 +1,5 @@
 const express = require('express');
-const actions = require("./actions");
+const actions = require("./exerciseService");
 
 const app = express();
 const port = process.env.PORT;
@@ -17,3 +17,5 @@ app.get('/exercises/:id', actions.getExerciseByIdHandler);
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+
+module.exports = app;
