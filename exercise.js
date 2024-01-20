@@ -1,10 +1,12 @@
 const express = require('express');
 const exerciseServise = require("./exerciseService");
+const cors = require("cors");
 
 const app = express();
 const port = process.env.PORT;
 
 app.use(express.json());
+app.use(cors());
 
 // Route to get all the exercises
 // Use the function as the handler for the '/exercises' route
