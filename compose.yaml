@@ -14,7 +14,13 @@ services:
     build: .
     command: node dataInsertion.js
     depends_on:
-      - database    
+      - database   
+
+  prisma-migrate:
+    build: .
+    command: npx prisma migrate deploy
+    depends_on:
+      - database     
 
   exercise-service:
     build: .
