@@ -34,12 +34,39 @@ The Exercise Microservice is a component of the Workout Tracker web application 
     npx prisma migrate dev
     ```
 
-## Database Configuration
+## Database and Prisma Configuration
 
-To configure the database connection, create a `.env` file in the project root directory with the following content:
+The "Workouts Service" uses a PostgreSQL database for storing workout and exercise set data, and it utilizes Prisma as an ORM (Object-Relational Mapping) tool. Follow these steps to configure the database and Prisma:
 
-```plaintext
-DATABASE_URL=your_database_connection_string
+### Database Setup
+
+1. Ensure you have PostgreSQL installed and running on your system.
+
+2. Create a database named "exercises" in PostgreSQL. This can typically be done using a PostgreSQL command line tool or a GUI tool like pgAdmin.
+
+3. Create a `.env` file in the project directory.
+
+4. Add the following configuration to the `.env` file with your PostgreSQL database connection URL:
+    ```env
+    DATABASE_URL=your_postgresql_database_url_here
+    ```
+   Replace `your_postgresql_database_url_here` with the actual URL for your PostgreSQL database. The URL usually follows the format: `postgresql://username:password@localhost:5432/exercises`
+
+5. Save the `.env` file.
+
+### Prisma Configuration
+
+1. Generate Prisma Client, which is used to access your database in your code:
+    ```
+    npx prisma generate
+    ```
+
+2. Create and apply a new migration to your database. This will set up the initial schema as defined in `schema.prisma`:
+    ```
+    npx prisma migrate dev --name init
+    ```
+
+6. After running the migration, verify that the tables have been created in your "exercises" database.
 ```
 
 ## API Endpoints
