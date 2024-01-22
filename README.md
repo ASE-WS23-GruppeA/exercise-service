@@ -66,7 +66,7 @@ The "Workouts Service" uses a PostgreSQL database for storing workout and exerci
     npx prisma migrate dev --name init
     ```
 
-6. After running the migration, verify that the tables have been created in your "exercises" database.
+3. After running the migration, verify that the tables have been created in your "exercises" database.
 ```
 
 ## API Endpoints
