@@ -1,6 +1,19 @@
 version: '3.8'
 services:
 
+  exercise-service:
+    build: 
+      context: .
+      dockerfile: Dockerfile.app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - DATABASE_URL=${DATABASE_URL}
+    depends_on: 
+      database: 
+        condition: service_healthy  
+
   database:
     image: postgres:latest
     environment:
@@ -9,23 +22,17 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -q" ]
+      interval: 5s
+      timeout: 2s
+      retries: 10  
 
   data-initializer:
-    build: .
-    command: node dataInsertion.js
+    build: 
+      context: .
+      dockerfile: Dockerfile.insertion
+    command: "sh -c 'npx prisma migrate deploy && node dataInsertion.js'"
     depends_on:
-      - database   
-
-  prisma-migrate:
-    build: .
-    command: npx prisma migrate deploy
-    depends_on:
-      - database     
-
-  exercise-service:
-    build: .
-    ports:
-      - "3000:3000"
-    environment:
-      - NODE_ENV=${NODE_ENV}
-      - DATABASE_URL=${DATABASE_URL}
+      database: 
+        condition: service_healthy     
