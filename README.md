@@ -29,10 +29,11 @@ The Exercise Microservice is a component of the Workout Tracker web application 
     ```shell
     npm install
     ```
-3. Initialize the database tables.
-    ```shell
-    npx prisma migrate dev
+3. Start the server:
+    ```bash
+    npm start
     ```
+The service should now be accessible at http://localhost:3000 by default.
 
 ## Database and Prisma Configuration
 
@@ -66,7 +67,12 @@ The "Workouts Service" uses a PostgreSQL database for storing workout and exerci
     npx prisma migrate dev --name init
     ```
 
-3. After running the migration, verify that the tables have been created in your "exercises" database.
+3. After running the migration, verify that the tables have been created in your `exercises` database.
+
+4. Insert data at the `exercises` table:
+    ```
+    node dataInsertion.js
+    ```
 
 ## API Endpoints
 
@@ -80,7 +86,7 @@ The Exercise Microservice provides the following API endpoints:
 To start the microservice, run:
 
 ```shell
-npm run devStart
+npm start
 ```
 
 ## Examples
